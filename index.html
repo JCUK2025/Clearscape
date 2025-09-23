@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clearscape Tracker</title>
+</head>
+<body>
+  <h1>Clearscape Tracker</h1>
+
+  <h2>Add Transaction</h2>
+  <input type="date" id="date">
+  <select id="type">
+    <option value="Sale">Sale</option>
+    <option value="Expense">Expense</option>
+  </select>
+  <input type="number" id="amount" placeholder="Amount (£)">
+  <input type="text" id="note" placeholder="Note">
+  <button onclick="addTransaction()">Add</button>
+
+  <h2>Transactions</h2>
+  <button onclick="exportCSV()">Export CSV</button>
+  <table id="transactionTable"></table>
+
+  <script src="main.js"></script>
+</body>
+</html>
+
+
