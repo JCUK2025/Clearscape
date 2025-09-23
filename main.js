@@ -152,4 +152,5 @@ function addRecurringEntries() {
   } catch (e) {
     console.warn("LocalStorage write failed:", e);
   }
-}
+
+
