@@ -242,3 +242,4 @@ function addRecurringEntries() {
 
   localStorage.setItem('clearscapeData', JSON.stringify(transactions));
 }
+}
