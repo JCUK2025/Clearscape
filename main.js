@@ -105,7 +105,7 @@ function exportCSV() {
   document.getElementById('recAmount').value = '';
   document.getElementById('recNote').value = '';
   renderRecurring();
-}
+
 
 function deleteRecurring(index) {
   if (confirm("Delete this recurring entry?")) {
@@ -132,3 +132,4 @@ function addRecurringEntries() {
 
   localStorage.setItem('clearscapeData', JSON.stringify(transactions));
 }
+
