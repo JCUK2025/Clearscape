@@ -110,8 +110,8 @@ function updateTable() {
     .join(', ');
   document.getElementById('topCategories').textContent = topCats || '—';
 
-  drawCharts(categoryTotals, monthlyTotals);
-}
+  drawCharts(categoryTotals, monthlyTotals);}
+
 
 function drawCharts(categoryTotals, monthlyTotals) {
   const pieCtx = document.getElementById('categoryChart').getContext('2d');
@@ -204,4 +204,5 @@ function addRecurring() {
   const type = document.getElementById('recType').value;
   const category = document.getElementById('recCategory').value;
   const amount = parseFloat(document.getElementById('recAmount').value);
+
   const note = document.getElementBy
