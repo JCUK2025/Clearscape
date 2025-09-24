@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clearscape Tracker</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#e6f2e6" />
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e6f2e6;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #2e5c2e;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      color: #2e5c2e;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    input:focus, select:focus {
+      border-color: #2e5c2e;
+      outline: none;
+    }
+
+    .recurring-group {
+      margin-top: 12px;
+    }
+
+    button {
+      background-color: #2e5c2e;
+      color: white;
+      border: none;
+      margin-top: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1f3f1f;
+    }
+
+    .dashboard {
+      margin-top: 30px;
+      background-color: #ffffff;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .dashboard strong {
+      color: #2e5c2e;
+    }
+
+    #reminderBox, #quoteBox {
+      margin-top: 20px;
+      background-color: #d9ead3;
+      padding: 12px;
+      border-radius: 8px;
+      color: #2e5c2e;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    #quoteBox {
+      font-style: italic;
+      background-color: #e0f5e0;
+    }
+
+    a {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: #2e5c2e;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    #splashScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: #e6f2e6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    #splashScreen.fadeOut {
+      animation: fadeOut 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+
+    #splashScreen img {
+      width: 100px;
+      margin-bottom: 20px;
+      animation: bounce 1.2s ease infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .seasonal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9998;
+      overflow: hidden;
+    }
+
+    .seasonal span {
+      position: absolute;
+      display: block;
+      font-size: 20px;
+      animation: fall 10s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="splashScreen">
+    <img src="icon-192.png" alt="Clearscape Logo" />
+    <h2>Welcome to Clearscape</h2>
+    <p>🌱 Track your growth. Stay on top.</p>
+    <button onclick="hideSplash()">Enter App</button>
+  </div>
+
+  <div class="seasonal" id="seasonalLayer"></div>
+  <audio id="ambientSound" src="chime.mp3" preload="auto"></audio>
+
+  <h1>Clearscape Tracker</h1>
+
+  <form onsubmit="addTransaction(); return false;">
+    <!-- form fields unchanged -->
+    <label for="date">Date:</label>
+    <input type="date" id="date" required>
+    <label for="type">Type:</label>
+    <select id="type">
+      <option value="Sale">Sale</option>
+      <option value="Expense">Expense</option>
+      <option value="Deposit">Deposit</option>
+    </select>
+    <label for="category">Category:</label>
+    <select id="category">
+      <option value="Lawn maintenance">Lawn maintenance</option>
+      <option value="Hedge maintenance">Hedge maintenance</option>
+      <option value="Landscaping">Landscaping</option>
+      <option value="Tree surgery">Tree surgery</option>
+      <option value="Machinery Servicing/Repair">Machinery Servicing/Repair</option>
+      <option value="Fuel">Fuel</option>
+      <option value="Wages">Wages</option>
+      <option value="Utilities">Utilities</option>
+      <option value="Rent">Rent</option>
+      <option value="Materials">Materials</option>
+      <option value="Equipment/Uniform">Equipment/Uniform</option>
+      <option value="Other">Other</option>
+    </select>
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" step="0.01" required>
+    <label for="note">Note:</label>
+    <input type="text" id="note">
+    <label for="person">Person:</label>
+    <input type="text" id="person">
+    <div class="recurring-group">
+      <label><input type="checkbox" id="recurringToggle"> Repeat this transaction</label>
+      <label for="recurringFrequency" id="recurringLabel" style="display:none;">Frequency:</label>
+      <select id="recurringFrequency" style="display:none;">
+        <option value="weekly">Weekly</option>
+        <option value="4-weekly">Every 4 Weeks</option>
+        <option value="monthly">Monthly</option>
+        <option value="quarterly">Quarterly</option>
+        <option value="yearly">Yearly</option>
+      </select>
+    </div>
+    <button id="addButton" type="submit">Add</button>
+    <button id="updateButton" style="display:none;" onclick="updateTransaction()">Update</button>
+  </form>
+
+  <h2>Dashboard</h2>
+  <div class="dashboard">
+    <strong>Total Sales:</strong> £<span id="totalSales">0.00</span><br>
+    <strong>Total Expenses:</strong> £<span id="totalExpenses">0.00</span><br>
+    <strong>Net Balance:</strong> £<span id="netBalance">0.00</span>
+  </div>
+
+  <h2>This Month</h2>
+  <div class="dashboard">
+    <strong>Sales:</strong> £<span id="monthlySales">0.00</span><br>
+    <strong>Expenses:</strong> £<span id="monthlyExpenses">0.00</span><br>
+    <strong>Net:</strong> £<span id="monthlyNet">0.00</span>
+  </div>
+
+  <div id="reminderBox">💡 Remember to log all expenses before month-end!</div>
+  <div id="quoteBox">"Success is the sum of small efforts, repeated day in and day out." – Robert Collier</div>
+
+  <a href="history.html">View Transaction History →</a>
+    <script>
+    const toggle = document.getElementById('recurringToggle');
+    const freq = document.getElementById('recurringFrequency');
+    const label = document.getElementById('recurringLabel');
+
+    toggle.addEventListener('change', () => {
+      const show = toggle.checked;
+      freq.style.display = show ? 'block' : 'none';
+      label.style.display = show ? 'block' : 'none';
+    });
+
+    const editIndex = localStorage.getItem('editIndex');
+    if (editIndex !== null) {
+      editTransaction(parseInt(editIndex));
+      localStorage.removeItem('editIndex');
+    }
+
+    const reminders = [
+      "💡 Remember to log all expenses before month-end!",
+      "🔁 Review your recurring transactions regularly.",
+      "📊 Check your dashboard for unusual spikes.",
+      "🧾 Keep notes clear for future audits.",
+      "📅 Schedule time weekly to update your tracker."
+    ];
+    let i = 0;
+    setInterval(() => {
+      document.getElementById('reminderBox').textContent = reminders[i];
+      i = (i + 1) % reminders.length;
+    }, 8000);
+
+    const quotes = [
+      `"Success is the sum of small efforts, repeated day in and day out." – Robert Collier`,
+      `"Discipline is the bridge between goals and accomplishment." – Jim Rohn`,
+      `"Don’t watch the clock; do what it does. Keep going." – Sam Levenson`,
+      `"Great things are not done by impulse, but by a series of small things." – Vincent van Gogh`,
+      `"The secret of getting ahead is getting started." – Mark Twain`
+    ];
+    let q = 0;
+    setInterval(() => {
+      document.getElementById('quoteBox').textContent = quotes[q];
+      q = (q + 1) % quotes.length;
+    }, 15000);
+
+    function hideSplash() {
+      const splash = document.getElementById('splashScreen');
+      splash.classList.add('fadeOut');
+      setTimeout(() => {
+        splash.style.display = 'none';
+        resetInactivityTimer();
+      }, 1000);
+    }
+
+    function showSplash() {
+      const splash = document.getElementById('splashScreen');
+      splash.classList.remove('fadeOut');
+      splash.style.display = 'flex';
+      document.getElementById('ambientSound').play();
+    }
+
+    let inactivityTimer;
+    function resetInactivityTimer() {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        showSplash();
+      }, 60000);
+    }
+
+    ['click', 'keydown', 'scroll', 'touchstart'].forEach(event => {
+      document.addEventListener(event, resetInactivityTimer);
+    });
+
+    function launchSeasonalAnimation() {
+      const now = new Date();
+      const month = now.getMonth();
+      const seasonalLayer = document.getElementById('seasonalLayer');
+      const icon = (month === 11 || month <= 1) ? '❄️' : (month >= 8 && month <= 10) ? '🍂' : '🌸';
+
+      for (let i = 0; i < 20; i++) {
+        const leaf = document.createElement('span');
+        leaf.textContent = icon;
+        leaf.style.left = Math.random() * 100 + 'vw';
+        leaf.style.fontSize = Math.random() * 24 + 12 + 'px';
+        leaf.style.animationDuration = (6 + Math.random() * 6) + 's';
+        document.getElementById('seasonalLayer').appendChild(leaf);
+        setTimeout(() => leaf.remove(), 10000);
+      }
+
+      setTimeout(launchSeasonalAnimation, 3000);
+    }
+
+    launchSeasonalAnimation();
+  </script>
+
+  <script src="main.js"></script>
+</body>
+</html>
+
+
+ 
