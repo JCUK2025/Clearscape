@@ -1,0 +1,127 @@
+/* Base layout */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e6f2e6;
+  color: #2e4d2e;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Section styling */
+section {
+  background-color: #f0fff0;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+/* Form elements */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #ffffff;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Transaction history */
+#transactionList div {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-left: 5px solid #4caf50;
+}
+
+#transactionList div:nth-child(even) {
+  background-color: #f9fff9;
+}
+
+#transactionList button {
+  display: inline-block;
+  width: auto;
+  margin-right: 10px;
+  font-size: 0.9rem;
+}
+
+/* Graphs and history links */
+#graphsLink {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#graphsLink a {
+  text-decoration: none;
+  color: #2e4d2e;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 0 10px;
+}
+
+/* Splash screen */
+#logo {
+  width: 120px;
+  animation: bounce 1.2s ease infinite;
+}
+
+#splashMessage {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  font-style: italic;
+  color: #3c6e3c;
+}
+
+#seasonalImage {
+  margin-top: 20px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
