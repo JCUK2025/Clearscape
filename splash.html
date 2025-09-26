@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to Clearscape Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #dfffe0;
+      text-align: center;
+      padding: 40px 20px;
+      font-family: Arial, sans-serif;
+      color: #2e4d2e;
+    }
+
+    #logo {
+      width: 120px;
+      animation: bounce 1.2s ease infinite;
+    }
+
+    #splashMessage {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      font-style: italic;
+      color: #3c6e3c;
+    }
+
+    #seasonalImage {
+      margin-top: 20px;
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+
+    .fade-out {
+      animation: fadeOut 1s ease forwards;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+  </style>
+</head>
+<body>
+  <img id="logo" src="clearscape-logo.png" alt="Clearscape Logo" />
+  <p id="splashMessage"></p>
+  <img id="seasonalImage" src="" alt="Seasonal Visual" />
+
+  <script>
+    const quotes = [
+      "Success is built one entry at a time.",
+      "Matt, every small step builds your legacy.",
+      "Consistency is your competitive edge.",
+      "Track. Reflect. Grow.",
+      "You’ve got this, Matt.",
+      "Business clarity starts here.",
+      "Focus fuels progress.",
+      "Welcome back, Matt — let’s make today count.",
+      "Every entry is a step toward mastery.",
+      "Small wins build big results."
+    ];
+
+    document.getElementById("splashMessage").textContent =
+      quotes[Math.floor(Math.random() * quotes.length)];
+
+    function getSeasonalImage() {
+      const today = new Date();
+      const month = today.getMonth();
+      const date = today.getDate();
+      const day = today.getDay();
+
+      if (month === 9 && [26, 27, 28].includes(date)) return "birthday-cake.jpg";
+      if (month === 9 && [29, 30, 31].includes(date)) return "halloween.jpg";
+      if (month === 10 && date === 5) return "bonfire.jpg";
+      if (month === 11 && date >= 18 && date <= 31) return "snowman.jpg";
+      if (month === 0 && date <= 1) return "fireworks.jpg";
+      if (month === 3 && date >= 18 && date <= 21) return "easter.jpg";
+      if (month === 3 && date === 23) return "st-george.jpg";
+      if (month === 5 && date === 21) return "solstice.jpg";
+      if (month === 10 && day === 0 && date >= 8 && date <= 14) return "remembrance.jpg";
+
+      return "default.jpg";
+    }
+
+    document.getElementById("seasonalImage").src = getSeasonalImage();
+
+    setTimeout(() => {
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1000);
+    }, 4000);
+  </script>
+</body>
+</html>
