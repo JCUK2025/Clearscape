@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clearscape Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="splashScreen">
+    <img id="logo" src="clearscape-logo.png" alt="Clearscape Logo" />
+    <p id="splashMessage"></p>
+    <img id="seasonalImage" src="" alt="Seasonal Visual" />
+  </div>
+
+  <main>
+    <section id="dashboard">
+      <h2>Dashboard</h2>
+      <p>Sales Total: <span id="salesTotal">£0.00</span></p>
+      <p>Expenses Total: <span id="expensesTotal">£0.00</span></p>
+      <p>Deposits Total: <span id="depositTotal">£0.00</span></p>
+      <p>Outstanding Balance: <span id="outstandingTotal">£0.00</span></p>
+      <p>Current Balance: <span id="balance">£0.00</span></p>
+    </section>
+
+    <section id="entryForm">
+      <h2>New Transaction</h2>
+      <input type="date" id="date" />
+      <select id="type">
+        <option>Sale</option>
+        <option>Expense</option>
+        <option>Deposit</option>
+      </select>
+      <input type="text" id="category" placeholder="Category" />
+      <input type="number" id="totalDue" placeholder="Total Amount Due" />
+      <input type="number" id="amountPaid" placeholder="Amount Paid Today" />
+      <select id="paymentMethod">
+        <option>Cash</option>
+        <option>Cheque</option>
+        <option>Bank Transfer</option>
+        <option>Card</option>
+        <option>Other</option>
+      </select>
+      <label for="recurring">Recurring?</label>
+      <select id="recurring">
+        <option>None</option>
+        <option>Weekly</option>
+        <option>4-Weekly</option>
+        <option>Monthly</option>
+        <option>Quarterly</option>
+        <option>Yearly</option>
+        <option>Set Day</option>
+      </select>
+      <input type="date" id="repeatDate" placeholder="Next Due Date" />
+      <input type="hidden" id="editIndex" value="" />
+      <button onclick="saveTransaction()">💾 Save Transaction</button>
+    </section>
+
+    <section id="history">
+      <h2>Transaction History</h2>
+      <div id="transactionList"></div>
+    </section>
+
+    <section id="graphsLink">
+      <a href="graphs.html">📈 View Filters & Graphs</a>
+    </section>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
+
+
+   
