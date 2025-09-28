@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearScape Graphs</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="ClearScape Logo" class="header-logo" />
+    <nav>
+      <a href="index.html">🏠 Dashboard</a>
+      <a href="history.html">📜 History</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Monthly Overview</h1>
+    <canvas id="monthlyChart" width="400" height="300"></canvas>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const data = JSON.parse(localStorage.getItem('clearscape-data') || '[]');
+      const monthly = {};
+
+      data.forEach(tx => {
+        const date = new Date(tx.date);
+        const key = `${date.getFullYear()}-${date.getMonth() + 1}`;
+        if (!monthly[key]) {
+          monthly[key] = { sale: 0, expense: 0, repayment: 0 };
+        }
+        monthly[key][tx.type] += tx.amount;
+      });
+
+      const labels = Object.keys(monthly).sort();
+      const sales = labels.map(m => monthly[m].sale);
+      const expenses = labels.map(m => monthly[m].expense);
+      const repayments = labels.map(m => monthly[m].repayment);
+
+      new Chart(document.getElementById('monthlyChart'), {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Sales',
+              data: sales,
+              backgroundColor: '#4CAF50'
+            },
+            {
+              label: 'Expenses',
+              data: expenses,
+              backgroundColor: '#f44336'
+            },
+            {
+              label: 'Repayments',
+              data: repayments,
+              backgroundColor: '#2196F3'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

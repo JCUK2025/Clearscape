@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearScape History</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" />
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="ClearScape Logo" class="header-logo" />
+    <nav>
+      <a href="index.html">🏠 Dashboard</a>
+      <a href="graphs.html">📊 Graphs</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Transaction History</h1>
+    <div id="history-list"></div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const data = JSON.parse(localStorage.getItem('clearscape-data') || '[]');
+      const historyList = document.getElementById('history-list');
+
+      if (data.length === 0) {
+        historyList.innerHTML = '<p>No transactions recorded yet.</p>';
+        return;
+      }
+
+      const grouped = {};
+      data.forEach(tx => {
+        const date = new Date(tx.date);
+        const key = `${date.getFullYear()}-${date.getMonth() + 1}`;
+        if (!grouped[key]) grouped[key] = [];
+        grouped[key].push(tx);
+      });
+
+      Object.keys(grouped).sort().reverse().forEach(month => {
+        const section = document.createElement('section');
+        section.innerHTML = `<h2>${month}</h2>`;
+        grouped[month].forEach(tx => {
+          const item = document.createElement('div');
+          item.className = `tx-item ${tx.type}`;
+          item.innerHTML = `
+            <strong>${tx.description}</strong><br/>
+            £${tx.amount.toFixed(2)} — ${tx.type}<br/>
+            <small>${new Date(tx.date).toLocaleDateString('en-GB')}</small>
+          `;
+          section.appendChild(item);
+        });
+        historyList.appendChild(section);
+      });
+    });
+  </script>
+
+  <style>
+    .tx-item {
+      background: #fff;
+      border-left: 6px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+    .tx-item.sale { border-color: #4CAF50; }
+    .tx-item.expense { border-color: #f44336; }
+    .tx-item.repayment { border-color: #2196F3; }
+  </style>
+</body>
+</html>
