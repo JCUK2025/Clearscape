@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ClearScape History</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash">
+    <img id="logo" src="logo.png" alt="ClearScape Logo">
+    <button onclick="enterApp()">ClearScape</button>
+    <audio id="splashSound" src="ambient.mp3" preload="auto"></audio>
+  </div>
+
+  <h1>📜 Transaction History</h1>
+  <p id="historyQuote" style="font-style: italic; color: #2e5d2e; text-align: center;"></p>
+
+  <form id="filterForm" onsubmit="applyFilters(); return false;">
+    <label>Date From:
+      <input type="date" id="dateFrom" class="filter-input">
+    </label>
+
+    <label>Date To:
+      <input type="date" id="dateTo" class="filter-input">
+    </label>
+
+    <label>Type:
+      <select id="filterType" class="filter-input">
+        <option value="">All</option>
+        <option>Sale</option>
+        <option>Expense</option>
+        <option>Deposit</option>
+        <option>Refund</option>
+      </select>
+    </label>
+
+    <label>Search Name:
+      <input type="text" id="filterName" class="filter-input" placeholder="Client or job name">
+    </label>
+
+    <div id="filterButtons">
+      <button type="submit" class="nav-button">🎯 Apply Filters</button>
+      <button type="button" class="nav-button" onclick="clearFilters()">🧹 Clear</button>
+      <button type="button" class="nav-button" onclick="downloadCSV()">📁 Download CSV</button>
+      <button type="button" class="nav-button" onclick="downloadAllCSV()">📂 Download All CSV</button>
+    </div>
+  </form>
+
+  <section id="historyScroll">
+    <div id="historyResults"></div>
+  </section>
+
+  <script src="main.js"></script>
+</body>
+</html>
