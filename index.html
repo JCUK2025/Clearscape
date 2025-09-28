@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearScape</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="favicon.ico" />
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <img src="logo.png" alt="ClearScape Logo" class="logo" />
+    <button onclick="enterApp()">Enter ClearScape</button>
+    <audio id="ambient" src="ambient.mp3" autoplay loop></audio>
+  </div>
+
+  <!-- Main App -->
+  <div id="dashboard" style="display:none;">
+    <header>
+      <img src="logo.png" alt="ClearScape Logo" class="header-logo" />
+      <nav>
+        <a href="settings.html">⚙️</a>
+        <a href="history.html">📁</a>
+        <a href="graphs.html">📊</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Dashboard Summary -->
+      <section id="summary">
+        <h2>📊 Monthly Summary</h2>
+        <p><strong>Sales:</strong> £<span id="sales">0.00</span></p>
+        <p><strong>Expenses:</strong> £<span id="expenses">0.00</span></p>
+        <p><strong>Deposits:</strong> £<span id="deposits">0.00</span></p>
+        <p><strong>Refunds:</strong> £<span id="refunds">0.00</span></p>
+        <p><strong>Outstanding:</strong> £<span id="outstanding">0.00</span></p>
+        <p><strong>Total Balance:</strong> £<span id="balance">0.00</span></p>
+      </section>
+
+      <!-- Transaction Input -->
+      <section id="tx-input">
+        <h2>➕ Add Transaction</h2>
+        <form id="tx-form">
+          <input type="date" id="date" required />
+          <input type="text" id="desc" placeholder="Customer Name" required />
+          <select id="type" required>
+            <option value="">Select Type</option>
+            <option value="sale">Sale</option>
+            <option value="expense">Expense</option>
+            <option value="deposit">Deposit</option>
+            <option value="refund">Refund</option>
+          </select>
+          <select id="job-type" required>
+            <option value="">Select Job Type</option>
+          </select>
+          <input type="number" id="amt-due" placeholder="Amount Due (£)" required />
+          <input type="number" id="amt-paid" placeholder="Actual Paid (£)" />
+          <textarea id="notes" placeholder="Notes (optional)"></textarea>
+          <select id="recurrence">
+            <option value="">Recurrence</option>
+            <option value="weekly">Weekly</option>
+            <option value="4-weekly">4-Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="annually">Annually</option>
+          </select>
+          <button type="submit">Add Transaction</button>
+        </form>
+      </section>
+
+      <!-- Useful Info -->
+      <section id="info">
+        <h2>💡 Useful Information</h2>
+        <div id="reminders">
+          <p>📌 Don’t forget to enter all transactions before month end.</p>
+          <p>📌 Outstanding customers: <span id="outstanding-count">0</span></p>
+          <p>📌 Next month’s recurring expenses: £<span id="next-recurring">0.00</span></p>
+          <p>📌 Upcoming annual expenses: <span id="annual-alert">None</span></p>
+        </div>
+        <div id="quote">
+          <p>“Consistency compounds. Keep logging, keep growing.”</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
