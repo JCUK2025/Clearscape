@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearScape</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="clearscape-header">
+    <span id="currentDate"></span>
+    <h1>ClearScape</h1>
+  </header>
+
+  <section class="summary">
+    <h2>This Month</h2>
+    <p>Sales: £0.00</p>
+    <p>Expenses: £0.00</p>
+    <p>Deposits: £0.00</p>
+    <p>Outstanding: £0.00</p>
+    <p>Balance: £0.00</p>
+  </section>
+
+  <section class="transaction-form">
+    <h2>Add Transaction</h2>
+    <label for="date">Date (dd/mm/yyyy):</label>
+    <input type="text" id="date" placeholder="28/09/2025" />
+
+    <label for="type">Transaction Type:</label>
+    <select id="type">
+      <option value="sales">Sales</option>
+      <option value="expenses">Expenses</option>
+      <option value="deposits">Deposits</option>
+      <option value="refunds">Refunds</option>
+    </select>
+
+    <label for="subtype">Transaction Subtype:</label>
+    <select id="subtype">
+      <optgroup label="Sales">
+        <option value="lawn">Lawn Maintenance</option>
+        <option value="hedge">Hedge Maintenance</option>
+        <option value="landscaping">Landscaping</option>
+        <option value="fencing">Fencing</option>
+        <option value="tree">Tree Surgery / Felling</option>
+        <option value="machinery">Machinery Servicing / Repair</option>
+        <option value="decking">Decking/Paving</option>
+      </optgroup>
+      <optgroup label="Expenses">
+        <option value="wages">Wages</option>
+        <option value="utilities">Utilities</option>
+        <option value="services">Services</option>
+        <option value="fuel">Fuel</option>
+        <option value="materials">Materials</option>
+        <option value="equipment">Equipment</option>
+        <option value="clothing">Clothing / Safety Equipment</option>
+        <option value="petty">Petty Cash</option>
+        <option value="other-expense">Other</option>
+      </optgroup>
+      <optgroup label="Deposits">
+        <option value="loan">Loan</option>
+        <option value="cash">Cash Injection</option>
+        <option value="refund">Supplier Refund</option>
+        <option value="tax">Tax Rebate</option>
+        <option value="other-deposit">Other</option>
+      </optgroup>
+      <optgroup label="Refunds">
+        <option value="goodwill">Goodwill Gesture</option>
+        <option value="cancellation">Job Cancellation</option>
+        <option value="other-refund">Other</option>
+      </optgroup>
+    </select>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Client or Job Name" />
+
+    <label for="notes">Notes:</label>
+    <input type="text" id="notes" placeholder="Optional notes..." />
+
+    <label for="total">Total Due:</label>
+    <input type="number" id="total" />
+
+    <label for="paid">Amount Paid:</label>
+    <input type="number" id="paid" />
+
+    <label for="method">Payment Method:</label>
+    <select id="method">
+      <option value="cash">Cash</option>
+      <option value="card">Card</option>
+      <option value="bank">Bank Transfer</option>
+    </select>
+
+    <label><input type="checkbox" id="recurring" /> Recurring</label>
+
+    <button class="clearscape-button">Save</button>
+  </section>
+
+  <section class="reminders">
+    <h2>Reminders</h2>
+    <label><input type="checkbox" /> Complete expenses before month-end</label><br />
+    <label><input type="checkbox" /> Chase outstanding balances</label>
+  </section>
+
+  <section class="nav-buttons">
+    <button class="clearscape-button">Filters & Graphs</button>
+    <button onclick="window.location.href='history.html'" class="clearscape-button">Transaction History</button>
+    <button class="clearscape-button">Settings</button>
+  </section>
+
+  <script>
+    const today = new Date();
+    const formatted = today.toLocaleDateString("en-GB");
+    document.getElementById("currentDate").textContent = formatted;
+  </script>
+  <script src="main.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+   
