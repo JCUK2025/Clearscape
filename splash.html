@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to ClearScape</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+  <section id="splash-screen">
+    <div id="splash-content">
+      <h1 id="greeting">Welcome</h1>
+      <button onclick="enterApp()">Enter ClearScape</button>
+      <audio id="ambient" src="ambient.mp3" autoplay loop></audio>
+    </div>
+  </section>
+
+  <div id="dashboard" style="display:none;">
+    <!-- Dashboard content will be injected or revealed here -->
+  </div>
+
+  <script>
+    function enterApp() {
+      document.getElementById('splash-screen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+
+      const ambient = document.getElementById('ambient');
+      let fade = setInterval(() => {
+        if (ambient.volume > 0.05) {
+          ambient.volume -= 0.05;
+        } else {
+          ambient.volume = 0;
+          ambient.pause();
+          ambient.currentTime = 0;
+          clearInterval(fade);
+        }
+      }, 100);
+    }
+
+    function seasonalGreeting() {
+      const now = new Date();
+      const month = now.getMonth();
+      const day = now.getDate();
+      const greetings = ["Welcome back", "Hello", "Good day", "Nice to see you", "Ready to grow?"];
+
+      if (month === 9 && day >= 25) greetings.unshift("🎃 Happy Halloween");
+      if (month === 11 && day >= 20) greetings.unshift("🎄 Merry Christmas");
+      if (month === 0 && day <= 7) greetings.unshift("🎉 Happy New Year");
+
+      const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+      document.getElementById('greeting').textContent = greeting;
+    }
+
+    window.addEventListener('DOMContentLoaded', seasonalGreeting);
+  </script>
+</body>
+</html>
