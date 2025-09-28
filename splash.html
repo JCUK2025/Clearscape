@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to ClearScape</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Splash Screen -->
+  <section id="splash-screen">
+    <div id="splash-content">
+      <h1 id="greeting">Welcome to ClearScape</h1>
+      <p id="sub-greeting"></p>
+      <button onclick="enterApp()">Enter</button>
+    </div>
+  </section>
+
+  <!-- Hidden Dashboard Container -->
+  <div id="dashboard" style="display:none;">
+    <!-- Your dashboard content will be revealed here -->
+  </div>
+
+  <!-- Splash Logic -->
+  <script>
+    function enterApp() {
+      document.getElementById('splash-screen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+    }
+
+    function seasonalGreeting() {
+      const now = new Date();
+      const month = now.getMonth();
+      const day = now.getDate();
+
+      const greetings = [
+        "Welcome back!",
+        "Hello again!",
+        "Nice to see you!",
+        "Ready to grow?",
+        "Let’s make today count.",
+        "Your garden of clarity awaits.",
+        "Let’s plant some progress.",
+        "Time to tidy your transactions.",
+        "Let’s clear the path ahead."
+      ];
+
+      if (month === 9 && day >= 25) greetings.unshift("🎃 Happy Halloween!");
+      if (month === 11 && day >= 20) greetings.unshift("🎄 Merry Christmas!");
+      if (month === 0 && day <= 7) greetings.unshift("🎉 Happy New Year!");
+      if (month === 1 && day === 14) greetings.unshift("❤️ Happy Valentine’s Day!");
+      if (month === 3 && day >= 1 && day <= 7) greetings.unshift("🌸 Welcome Spring!");
+      if (month === 5 && day >= 1 && day <= 7) greetings.unshift("☀️ Summer’s here!");
+      if (month === 8 && day >= 1 && day <= 7) greetings.unshift("🍂 Autumn vibes incoming!");
+
+      const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+      document.getElementById('sub-greeting').textContent = greeting;
+    }
+
+    window.addEventListener('DOMContentLoaded', seasonalGreeting);
+  </script>
+</body>
+</html>
+
+
