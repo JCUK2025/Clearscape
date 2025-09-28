@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearScape</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="favicon.ico" />
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <img src="logo.png" alt="ClearScape Logo" class="logo" />
+    <button onclick="enterApp()">Enter ClearScape</button>
+    <audio id="ambient" src="ambient.mp3" autoplay loop></audio>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" style="display:none;">
+    <header>
+      <img src="logo.png" alt="ClearScape Logo" class="header-logo" />
+      <nav>
+        <a href="history.html">📜 History</a>
+        <a href="graphs.html">📊 Graphs</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Business Dashboard</h1>
+      <form id="tx-form">
+        <input type="text" id="desc" placeholder="Description" required />
+        <input type="number" id="amt" placeholder="Amount (£)" required />
+        <select id="type">
+          <option value="sale">Sale</option>
+          <option value="expense">Expense</option>
+          <option value="repayment">Repayment</option>
+        </select>
+        <button type="submit">Add Transaction</button>
+      </form>
+
+      <section id="summary">
+        <p><strong>Sales:</strong> £<span id="sales">0.00</span></p>
+        <p><strong>Expenses:</strong> £<span id="expenses">0.00</span></p>
+        <p><strong>Repayments:</strong> £<span id="repayments">0.00</span></p>
+        <p><strong>Profit:</strong> £<span id="profit">0.00</span></p>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
