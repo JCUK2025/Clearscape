@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearScape History</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="clearscape-header">
+    <span id="currentDate"></span>
+    <h1>ClearScape History</h1>
+  </header>
+
+  <!-- Filters -->
+  <section class="filters">
+    <h2>Filters</h2>
+    <label for="filterType">Type:</label>
+    <select id="filterType" class="clearscape-button">
+      <option value="">All</option>
+      <option value="sales">Sales</option>
+      <option value="expenses">Expenses</option>
+      <option value="deposits">Deposits</option>
+      <option value="refunds">Refunds</option>
+    </select>
+
+    <label for="filterDate">Date:</label>
+    <input type="date" id="filterDate" class="clearscape-button" />
+
+    <button id="applyFilters" class="clearscape-button">Apply Filters</button>
+    <button id="clearFilters" class="clearscape-button">Clear Filters</button>
+  </section>
+
+  <!-- Transaction History -->
+  <section class="history-section">
+    <h2>Transaction History</h2>
+    <div id="historyList" class="scrollable-list">
+      <!-- Transactions will be injected here -->
+    </div>
+    <div id="paginationControls" class="nav-buttons"></div>
+  </section>
+
+  <!-- Export Button -->
+  <section class="export-section">
+    <button id="exportCSV" class="clearscape-button">Export to CSV</button>
+  </section>
+
+  <!-- Footer Home Button -->
+  <div class="clearscape-footer">
+    <button onclick="window.location.href='index.html'" class="clearscape-button">
+      <img src="clearscape-home-icon.png" alt="Home" class="clearscape-icon" />
+    </button>
+  </div>
+
+  <!-- Date Script -->
+  <script>
+    const today = new Date();
+    const formatted = today.toLocaleDateString("en-GB");
+    document.getElementById("currentDate").textContent = formatted;
+  </script>
+
+  <script src="main.js"></script>
+</body>
+</html>
+
