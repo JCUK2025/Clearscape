@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to ClearScape</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section id="splash-screen">
+    <div id="splash-content" class="splash-theme">
+      <h1 id="greeting">Welcome to ClearScape</h1>
+      <p id="sub-greeting">Let’s bring clarity to your season.</p>
+      <button onclick="enterApp()">Enter</button>
+    </div>
+  </section>
+
+  <script>
+    function enterApp() {
+      window.location.href = 'index.html';
+    }
+
+    function applySplashTheme() {
+      const month = new Date().getMonth();
+      const splash = document.querySelector('#splash-content');
+      if (!splash) return;
+
+      if (month >= 2 && month <= 4) splash.classList.add('spring');
+      else if (month >= 5 && month <= 7) splash.classList.add('summer');
+      else if (month >= 8 && month <= 10) splash.classList.add('autumn');
+      else splash.classList.add('winter');
+    }
+
+    applySplashTheme();
+  </script>
+</body>
+</html>
+
+
