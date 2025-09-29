@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearScape Index</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <div class="form-group">
+      <label for="transactionType">Transaction Type</label>
+      <select id="transactionType">
+        <option>Sale</option>
+        <option>Expense</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="jobType">Job Type</label>
+      <select id="jobType">
+        <option>Consulting</option>
+        <option>Design</option>
+        <option>Development</option>
+      </select>
+    </div>
+
+    <div class="amount-row">
+      <div class="form-group">
+        <label for="amountDue">Amount Due</label>
+        <input type="number" id="amountDue" placeholder="£0.00" />
+      </div>
+      <div class="form-group">
+        <label for="amountPaid">Amount Paid</label>
+        <input type="number" id="amountPaid" placeholder="£0.00" />
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <button><i class="fas fa-cog green-icon"></i><span>Settings</span></button>
+    <button><i class="fas fa-exchange-alt green-icon"></i><span>Transactions</span></button>
+    <button><i class="fas fa-chart-line green-icon"></i><span>Graphs</span></button>
+  </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
