@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearScape History</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>📁 Transaction History</h1>
+  </header>
+
+  <!-- Filter Controls -->
+  <section id="filters">
+    <div class="row">
+      <select id="filter-type">
+        <option value="">All Types</option>
+        <option value="sale">Sales</option>
+        <option value="expense">Expenses</option>
+        <option value="deposit">Deposits</option>
+        <option value="refund">Refunds</option>
+        <option value="withdrawal">Withdrawals</option>
+      </select>
+
+      <select id="filter-recurrence">
+        <option value="">All</option>
+        <option value="recurring">Recurring Only</option>
+        <option value="one-time">One-Time Only</option>
+      </select>
+
+      <input type="date" id="filter-from" />
+      <input type="date" id="filter-to" />
+      <button onclick="applyFilters()">🔍 Filter</button>
+      <button onclick="clearFilters()">🧹 Clear</button>
+    </div>
+  </section>
+
+  <!-- History List -->
+  <section id="history-list">
+    <div id="tx-history"></div>
+  </section>
+
+  <!-- CSV Export Controls -->
+  <section id="export-controls">
+    <div class="row">
+      <select id="export-range">
+        <option value="all">📤 Export All</option>
+        <option value="filtered">📤 Export Filtered</option>
+        <option value="last30">📤 Last 30 Days</option>
+        <option value="thisMonth">📤 This Month</option>
+      </select>
+
+      <select id="export-month">
+        <option value="">Month</option>
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+
+      <select id="export-year">
+        <option value="">Year</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+      </select>
+
+      <button onclick="exportCSV()">📄 Preview CSV</button>
+    </div>
+  </section>
+
+  <!-- CSV Preview Modal -->
+  <div id="csv-preview">
+    <div id="csv-box">
+      <h2>📄 CSV Preview</h2>
+      <div id="csv-content"></div>
+      <button onclick="downloadCSV()">📥 Download</button>
+      <button onclick="copyCSV()">📋 Copy to Clipboard</button>
+      <button onclick="alert('Cloud sync coming soon!')">☁️ Sync to Cloud</button>
+      <button onclick="closePreview()">✖️ Close</button>
+    </div>
+  </div>
+
+  <!-- Footer Navigation -->
+  <footer id="footer-nav">
+    <div id="footer-actions">
+      <button onclick="exportCSV()">📤</button>
+      <button onclick="scrollToLatest()">⬇️</button>
+      <button onclick="goHome()" title="Return to Dashboard">🏠</button>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="history.js"></script>
+</body>
+</html>
+
+
+
