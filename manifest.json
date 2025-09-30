@@ -1,0 +1,21 @@
+{
+    "name": "ClearScape Financial Tracker",
+    "short_name": "ClearScape",
+    "description": "Your private, secure financial flow tracker.",
+    "start_url": "index.html",
+    "display": "standalone",
+    "theme_color": "#4CAF50",
+    "background_color": "#ffffff",
+    "icons": [
+        {
+            "src": "app_icon_192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "app_icon_512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
