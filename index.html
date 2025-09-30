@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClearScape Financial Tracker</title>
+    
+    <link rel="icon" type="image/png" href="app_icon_192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="app_icon_512.png" sizes="512x512">
+    <link rel="apple-touch-icon" href="apple_touch_icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ClearScape">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="splashScreen">
+        <div id="logoContainer" style="position: relative;">
+            <img id="appLogo" src="clearscape_logo.png" alt="App Logo" style="width: 150px;">
+            <div id="seasonalDecoration"></div>
+        </div>
+        <h1 id="splashTitle" style="color: var(--primary-color);"></h1>
+        <p>Loading your data securely...</p>
+        <div style="display: flex; flex-direction: column; gap: 15px; width: 80%; max-width: 300px; margin-top: 30px;">
+            <button class="splash-btn" id="goToDashboardBtn">Dashboard</button>
+            <button class="splash-btn" id="goToTransactionsBtn">Transactions List</button>
+            <button class="splash-btn" id="goToInsightsBtn">Insights & Analytics</button>
+            <button class="splash-btn" id="goToSettingsBtn">Settings</button>
+        </div>
+    </section>
+
+    <section id="setupWizardView" style="display: none; text-align: center; padding: 20px 20px 50px 20px;">
+    
+        <div id="stepName" class="setup-step">
+            <h2>Welcome! Let's Get Started</h2>
+            <p>First, what's your name?</p>
+            <input type="text" id="userNameInput" placeholder="Your Name" required>
+            <button id="nextStepName">Next →</button>
+        </div>
+    
+        <div id="stepBusinessName" class="setup-step" style="display: none;">
+            <h2>What's your Business Name?</h2>
+            <p>This will be used as the title of your dashboard.</p>
+            <input type="text" id="businessNameInput" placeholder="e.g., John's Gardening" required>
+            <button id="backStepBusinessName">← Back</button>
+            <button id="nextStepBusinessName">Next →</button>
+        </div>
+    
+        <div id="stepCurrency" class="setup-step" style="display: none;">
+            <h2>Select Your Currency</h2>
+            <p>All financial values will be displayed with this currency.</p>
+            <select id="currencySetupSelect" style="display: block; width: 100%; max-width: 300px; margin: 0 auto 15px auto; padding: 10px;">
+                <option value="GBP">British Pound (£)</option>
+                <option value="USD">US Dollar ($)</option>
+                <option value="EUR">Euro (€)</option>
+            </select>
+            <button id="backStepCurrency">← Back</button>
+            <button id="nextStepCurrency">Next →</button>
+        </div>
+    
+        <div id="stepPassword" class="setup-step" style="display: none;">
+            <h2>Create a Settings Password</h2>
+            <p>This password will protect your settings menu.</p>
+            <input type="password" id="passwordSetupInput" placeholder="Enter password (e.g., 0000)" required>
+            <button id="backStepPassword">← Back</button>
+            <button id="nextStepPassword">Next →</button>
+        </div>
+    
+        <div id="stepBalance" class="setup-step" style="display: none;">
+            <h2>Set Your Starting Balance</h2>
+            <p>Enter your current cash balance to ensure accurate tracking.</p>
+            <input type="number" id="balanceSetupInput" placeholder="e.g., 5000.00" step="0.01" required>
+            <button id="backStepBalance">← Back</button>
+            <button id="nextStepBalance">Next →</button>
+        </div>
+    
+        <div id="stepCategories" class="setup-step" style="display: none;">
+            <h2>Review Job Categories</h2>
+            <p>These are pre-filled based on business type. Add any others you need.</p>
+            <div>
+                <input type="text" id="categorySetupInput" placeholder="Add a custom category...">
+                <button id="addCategoryWizardBtn">Add</button>
+            </div>
+            <ul id="categoryWizardList" style="list-style: none; padding: 0; margin: 15px auto; max-width: 300px;"></ul>
+            <button id="backStepCategories">← Back</button>
+            <button id="finishSetupBtn">Finish Setup</button>
+        </div>
+    
+    </section>
+
+    <div id="appContainer" style="display: none;">
+    
+        <header>
+            <button id="viewSplashBtn">Home</button>
+            <h1 id="appNameHeader">ClearScape</h1>
+            <div class="header-right-buttons">
+                <button id="viewAllTransactionsBtn">Transactions</button>
+                <button id="settingsBtn">Settings</button>
+            </div>
+        </header>
+
+        <main style="max-width: 1000px; margin: 0 auto; padding: 0 10px;">
+            
+            <section id="dashboardView" style="display: none;">
+                
+                <div id="smartInsightsBox" class="analytics-section" style="margin-top: 20px; border-left: 5px solid var(--primary-color);">
+                    <h3 style="margin-top: 0; font-size: 1.1em;">Smart Insights 💡</h3>
+                    <ul id="insightsList"></ul>
+                </div>
+                
+                <div id="budgetTrackerCard" class="summary-card" style="display: none; margin-top: 20px;">
+                    <h3 style="margin-top: 0; font-size: 1.1em;">Monthly Budget: <span id="budgetCategoryName"></span></h3>
+                    <p style="font-size: 1.5em; margin: 5px 0;"><span id="budgetSpentAmount"></span> / <span id="budgetLimitAmount"></span></p>
+                    <div style="background-color: #ddd; height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div id="budgetProgressBar" style="height: 100%; background-color: var(--primary-color); width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="summary-cards-container" style="margin-top: 20px;">
+                    <div id="salesCard" class="summary-card"><h3>Total Sales Revenue</h3><p id="totalSales" class="amount positive">£0.00</p></div>
+                    <div id="outflowCard" class="summary-card"><h3>Total Outflow</h3><p id="totalOutflow" class="amount negative">£0.00</p></div>
+                    <div id="balanceCard" class="summary-card"><h3>Outstanding Balance</h3><p id="outstandingBalance" class="amount balance">£0.00</p><span class="sub-text">(Cash Flow)</span></div>
+                    <div id="arCard" class="summary-card"><h3>Total Outstanding (A/R)</h3><p id="totalOutstanding" class="amount negative">£0.00</p></div>
+                </div>
+
+                <div class="transaction-form-container">
+                    <h2>Add New Transaction</h2>
+                    <form id="transactionForm" class="transaction-form-grid">
+                        <div class="form-group"><label for="transactionDate">Date</label><input type="date" id="transactionDate" required></div>
+                        <div class="form-group"><label for="transactionName">Name / Description</label><input type="text" id="transactionName" placeholder="Client, Vendor, or Item" required></div>
+                        <div class="form-group"><label for="transactionTypeSelect">Type of Transaction</label>
+                            <select id="transactionTypeSelect" required>
+                                <option value="Sale">Sale</option>
+                                <option value="Expense">Expense</option>
+                                <option value="Deposit">Deposit</option>
+                                <option value="Withdrawal">Withdrawal</option>
+                                <option value="Refund">Refund</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label for="jobTypeSelect">Job Type / Category</label><select id="jobTypeSelect" required></select></div>
+                        <div class="form-group"><label for="amountDueInput">Amount Due / Total Value</label><input type="number" id="amountDueInput" placeholder="100.00" step="0.01" required></div>
+                        <div class="form-group"><label for="amountPaidInput">Amount Paid / Transacted Now</label><input type="number" id="amountPaidInput" placeholder="100.00" step="0.01" required></div>
+                        <div class="form-group full-width"><label for="jobNotesInput">Notes</label><textarea id="jobNotesInput" placeholder="Detailed notes for this transaction..."></textarea></div>
+                        <div class="form-group checkbox-group"><input type="checkbox" id="isRecurringCheckbox"><label for="isRecurringCheckbox">Is this a Recurring Transaction?</label></div>
+                        <div id="recurringFrequencyGroup" class="form-group checkbox-group" style="display: none;">
+                            <label for="recurringFrequency">Frequency:</label>
+                            <select id="recurringFrequency">
+                                <option value="Weekly">Weekly</option>
+                                <option value="Monthly">Monthly</option>
+                                <option value="Quarterly">Quarterly</option>
+                                <option value="Yearly">Yearly</option>
+                            </select>
+                        </div>
+                        <input type="hidden" id="transactionId"> 
+                        <button type="submit" id="addTransactionBtn" class="full-width">Add Transaction</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="transactionListView" style="display: none;">
+                <button id="backToDashboardBtn">← Back to Dashboard</button>
+                <h2>All Transactions</h2>
+                
+                <div id="filterControls" class="analytics-section">
+                    <h3 style="margin-top: 0;">Filters & Search</h3>
+                    <input type="text" id="transactionSearchInput" placeholder="Search by name or notes..." style="width: 100%; max-width: 300px; padding: 8px; margin-bottom: 10px;">
+                    <label for="filterJobType">Job Type:</label><select id="filterJobType" style="margin-right: 20px; padding: 8px;"><option value="">All Job Types</option></select>
+                    <label for="filterPaidStatus">Paid Status:</label><select id="filterPaidStatus" style="margin-right: 20px; padding: 8px;"><option value="">All Transactions</option><option value="Outstanding">Outstanding Balance</option><option value="Paid">Fully Paid</option><option value="Overdue">Overdue</option></select>
+                    <label for="filterStartDate">From Date:</label><input type="date" id="filterStartDate" style="margin-right: 20px; padding: 8px;">
+                    <label for="filterEndDate">To Date:</label><input type="date" id="filterEndDate" style="margin-right: 20px; padding: 8px;">
+                    <button id="applyFiltersBtn" style="padding: 8px 15px;">Apply Filters</button>
+                    <button id="exportCsvBtn" style="padding: 8px 15px; margin-left: 10px; background-color: var(--balance-color); color: white;">Download CSV</button>
+                </div>
+                
+                <ul id="fullTransactionList"></ul>
+            </section>
+
+            <section id="settingsView" style="display: none;">
+                <button id="backToDashboardFromSettingsBtn">← Back to Dashboard</button>
+                <h2>Application Settings</h2>
+                
+                <div id="settingsUnlockView" class="analytics-section">
+                    <h3>Unlock Settings</h3>
+                    <p>Enter your password to manage application settings:</p>
+                    <input type="password" id="settingsPasswordInput" placeholder="Password" style="width: 100%; max-width: 300px;">
+                    <button id="unlockSettingsBtn">Unlock Settings</button>
+                    <p style="margin-top: 10px;"><a href="#" id="forgotPasswordLink">I Forgot My Password (Reset)</a></p>
+                </div>
+
+                <div id="actualSettings" class="analytics-section" style="display: none;">
+                    
+                    <h4>🎨 Branding & Theme</h4>
+                    <h4>💰 Monthly Budget Goal</h4>
+                    <h4>⚙️ Transaction Defaults</h4>
+                    <h4>Data Backup & Restore</h4>
+                    <h5>Security & Reset</h5>
+                </div>
+            </section>
+
+            <section id="categoryView" style="display: none;">
+                <button id="backToDashboardFromCategoryBtn">← Back to Dashboard</button>
+                <h2>Manage Job Categories</h2>
+                <input type="text" id="newCategoryInput" placeholder="Enter new category name" style="padding: 10px; margin-right: 10px;">
+                <button id="addCategoryBtn">Add Category</button>
+                <ul id="categoryList" style="margin-top: 20px;"></ul>
+            </section>
+            
+            <section id="insightsView" style="display: none;">
+                <button id="backToDashboardFromInsightsBtn">← Back to Dashboard</button>
+                <h2>ClearScape Analytics</h2>
+                <div class="analytics-section"><h3>🔔 Alerts & Reminders</h3><ul id="insightsListFull" style="list-style: none; padding: 0;"></ul><button id="refreshInsightsBtn" style="padding: 8px 15px;">Refresh Alerts</button></div>
+                <div class="analytics-section"><h3>📈 Yearly Performance Summary</h3><div id="yearlyAnalytics"></div></div>
+                <div class="analytics-section"><h3>📊 Monthly Revenue & Outflow</h3><div id="monthlyAnalytics"></div></div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+          });
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
