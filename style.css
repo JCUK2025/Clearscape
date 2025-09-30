@@ -1,0 +1,369 @@
+/* style.css */
+
+/* === CSS VARIABLES (Theme and Colors) === */
+:root {
+    --primary-color: #4CAF50; /* Green (Default) */
+    --pale-green: #e8f5e9;   /* Very Pale Green */
+    --secondary-color: #f0f0f0; /* Light Gray for section backgrounds */
+    --dark-text: #333;
+    --light-text: #fff;
+    --danger-color: #f44336; /* Red for resets, warnings, and negative cash flow */
+    --positive-color: var(--primary-color);
+    --negative-color: var(--danger-color);
+    --balance-color: #007bff; /* Custom Blue for Balance/Payoff buttons */
+    --ar-color: #ff9800; /* Amber for Accounts Receivable */
+}
+
+/* === BASE STYLES & MOBILE-FIRST RESET === */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--dark-text);
+    background-color: #fff;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    margin-top: 0;
+    color: var(--dark-text);
+}
+
+button, input[type="submit"] {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.1s ease;
+    font-weight: bold;
+    white-space: nowrap; 
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* === HEADER STYLING === */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: var(--primary-color);
+    color: white;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+header h1 {
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5em;
+}
+
+.header-right-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+header button {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* === SPLASH SCREEN STYLING === */
+#splashScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--pale-green);
+    text-align: center;
+    z-index: 1000;
+    transition: background-image 1s ease;
+}
+
+#splashTitle {
+    color: var(--primary-color);
+    margin: 20px 0 10px 0;
+}
+
+#splashScreen button {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 15px 20px;
+}
+
+/* === SETUP WIZARD STYLING === */
+.setup-step input, .setup-step select {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 15px auto;
+    padding: 10px;
+}
+
+.setup-step button {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+/* === GENERAL LAYOUT & SECTIONS === */
+.app-view {
+    padding: 20px;
+}
+
+.analytics-section {
+    padding: 15px;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+/* === DASHBOARD ELEMENTS === */
+.summary-cards-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.amount {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.positive { color: var(--positive-color); }
+.negative { color: var(--negative-color); }
+.balance { color: var(--balance-color); }
+
+#salesCard { border-left: 5px solid var(--positive-color); }
+#outflowCard { border-left: 5px solid var(--negative-color); }
+#balanceCard { border-left: 5px solid var(--balance-color); }
+#arCard { border-left: 5px solid var(--ar-color); }
+
+.transaction-form-container {
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.transaction-form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+input[type="text"], input[type="number"], input[type="date"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#addTransactionBtn {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    margin-top: 10px;
+}
+
+/* === TRANSACTION LIST VIEW === */
+#fullTransactionList {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.transaction-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.transaction-summary {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 10px;
+    align-items: center;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.transaction-details {
+    margin-top: 10px;
+    padding-top: 5px;
+    border-top: 1px dashed #eee;
+    font-size: 0.85em;
+    display: none;
+}
+
+.transaction-actions {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 5px;
+}
+
+.action-btn {
+    padding: 6px 10px;
+    font-size: 0.8em;
+}
+
+.repay-btn { background-color: var(--balance-color); color: white; }
+.edit-btn { background-color: #ffc107; color: var(--dark-text); }
+.delete-btn { background-color: var(--negative-color); color: white; }
+
+
+/* === INSIGHTS STYLING === */
+#insightsList li {
+    padding: 4px 0;
+    font-size: 0.9em;
+}
+
+.insight-warning {
+    color: var(--danger-color);
+    font-weight: bold;
+}
+
+.insight-good {
+    color: var(--positive-color);
+}
+
+.insight-quote {
+    color: #555;
+    font-style: italic;
+}
+
+
+/* === SPLASH SCREEN ANIMATIONS & THEMES === */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.logo-spin {
+    animation: spin 1s linear;
+}
+
+.logo-bounce {
+    animation: bounce 0.8s ease-in-out;
+}
+
+#seasonalDecoration {
+    position: absolute;
+    font-size: 3em;
+    bottom: -15px;
+    right: -25px;
+    transform: rotate(15deg);
+}
+
+#splashScreen.theme-christmas {
+    background-image: linear-gradient(to bottom, #ffffff, #dcedff);
+}
+#splashScreen.theme-christmas #seasonalDecoration::after {
+    content: '🎄';
+}
+
+#splashScreen.theme-halloween {
+    background-image: linear-gradient(to bottom, #6a5acd, #000000);
+}
+#splashScreen.theme-halloween #splashTitle {
+    color: #ff8c00;
+}
+#splashScreen.theme-halloween #seasonalDecoration::after {
+    content: '🎃';
+    transform: rotate(0);
+    right: -20px;
+}
+
+
+/* === ANALYTICS PAGE STYLING === */
+.chart-container {
+    margin-top: 20px;
+}
+
+
+/* === TABLET/DESKTOP OPTIMIZATION === */
+@media (min-width: 600px) {
+    .summary-cards-container {
+        flex-direction: row; 
+        flex-wrap: wrap;
+    }
+    .summary-card {
+        flex: 1 1 calc(50% - 10px);
+    }
+    
+    .transaction-form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .full-width {
+        grid-column: 1 / -1;
+    }
+
+    .transaction-summary {
+        font-size: 1em;
+    }
+
+    #analyticsView .summary-card {
+        flex-basis: calc(33.333% - 10px);
+    }
+}
+
+@media (min-width: 900px) {
+    .summary-card {
+        flex: 1 1 calc(25% - 12px);
+    }
+}
