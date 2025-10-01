@@ -637,11 +637,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('backToLockScreenBtn').addEventListener('click', showLockScreen);
 
     // Main Navigation
-    document.getElementById('goToDataCentreBtn').addEventListener('click', () => { if (initApp()) { renderDataCentre(); showView('dataCentreView'); } });
-    document.getElementById('goToNewTransactionBtn').addEventListener('click', () => { if (initApp()) { renderNewTransactionPage(); showView('newTransactionView'); } });
-    document.getElementById('goToTransactionsBtn').addEventListener('click', () => { if (initApp()) { showView('transactionListView'); renderFullTransactionList(); } });
-    document.getElementById('goToAnalyticsBtn').addEventListener('click', () => { if (initApp()) { renderAnalyticsPage(); showView('analyticsView'); } });
-    document.getElementById('goToSettingsBtn').addEventListener('click', () => { if (initApp()) { showView('settingsView'); } });
+    document.getElementById('goToDataCentreBtn').addEventListener('click', () => { renderDataCentre(); showView('dataCentreView'); });
+    document.getElementById('goToNewTransactionBtn').addEventListener('click', () => { renderNewTransactionPage(); showView('newTransactionView'); });
+    document.getElementById('goToTransactionsBtn').addEventListener('click', () => { showView('transactionListView'); renderFullTransactionList(); });
+    document.getElementById('goToAnalyticsBtn').addEventListener('click', () => { renderAnalyticsPage(); showView('analyticsView'); });
+    document.getElementById('goToSettingsBtn').addEventListener('click', () => { showView('settingsView'); });
     document.getElementById('headerNewTransactionBtn').addEventListener('click', () => { renderNewTransactionPage(); showView('newTransactionView'); });
     document.getElementById('headerTransactionsBtn').addEventListener('click', () => { showView('transactionListView'); renderFullTransactionList(); });
     document.getElementById('headerAnalyticsBtn').addEventListener('click', () => { renderAnalyticsPage(); showView('analyticsView'); });
